@@ -1,9 +1,11 @@
-<h1>Score view</h1>
+<h1>Result</h1>
 
 <%# Input/word from user %>
 <h3>Your word was <%= params[:word].upcase %></h3>
 <h3>Your letters were <%= params[:letters] %></h3>
 
 <p><%= @message %></p>
+
+<p><%= session[:score] %></p>
 
 <%= link_to "Play again", new_path %>

@@ -8,13 +8,18 @@ class GamesController < ApplicationController
   end
 
   def score
+    if session[:score].nil?
+      session[:score] = 0
+    end
     # The word can’t be built out of the original grid
     # The word is valid according to the grid, but is not a valid English word
     # The word is valid according to the grid and is an English word
     if included?(params[:word].upcase, params[:letters]) && english_word?(params[:word])
       @message = "Congratulations! #{params[:word].upcase} is a valid English word"
+      session[:score] += 1
     elsif included?(params[:word].upcase, params[:letters]) && !english_word?(params[:word])
       @message = "Sorry but #{params[:word].upcase} is not an English word"
+      session[:score] += 1
     else
       @message = "Sorry but #{params[:word].upcase} cannot be built out of #{params[:letters]}"
     end
